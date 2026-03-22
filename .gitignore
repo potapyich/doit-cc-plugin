@@ -1,0 +1,10 @@
+# Pipeline runtime state (lives in user's project, not here)
+.pipeline/state.json
+
+# macOS
+.DS_Store
+
+# Editor
+.idea/
+.vscode/
+*.swp
