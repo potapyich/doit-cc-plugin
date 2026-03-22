@@ -139,18 +139,18 @@ ralph 10
 
 ### Entry Point
 
-`/pipeline` — reads state, routes to current step or handles subcommand.
+`/armchair-architect` — reads state, routes to current step or handles subcommand.
 
 Subcommands via `$ARGUMENTS`:
-- `/pipeline` — run or continue from current step
-- `/pipeline status` — show current state
-- `/pipeline reset` — confirm and clear state
-- `/pipeline use <component> <impl>` — switch impl (e.g., `use execute ralphex`)
+- `/armchair-architect` — run or continue from current step
+- `/armchair-architect status` — show current state
+- `/armchair-architect reset` — confirm and clear state
+- `/armchair-architect use <component> <impl>` — switch impl (e.g., `use execute ralphex`)
 
 ### Two-Level Abstraction
 
 ```
-/pipeline ($ARGUMENTS)
+/armchair-architect ($ARGUMENTS)
     ↓
 SKILL.md orchestrator (reads state.json, selects step)
     ↓
@@ -193,7 +193,7 @@ SKILL.md orchestrator (reads state.json, selects step)
 
 | Question | Decision | Reason |
 |---|---|---|
-| Slash command format | `skills/pipeline/SKILL.md` | Plugin-compatible; `${CLAUDE_SKILL_DIR}` resolves step paths without hardcoding |
+| Slash command format | `skills/armchair-architect/SKILL.md` | Plugin-compatible; `${CLAUDE_SKILL_DIR}` resolves step paths without hardcoding |
 | Subcommands | `$ARGUMENTS` routing in single SKILL.md | No native subcommand support in Claude Code |
 | State injection | `` !`cat .pipeline/state.json 2>/dev/null \|\| echo '{}'` `` | Injects live state before Claude sees prompt |
 | Ralph call | Claude uses Bash tool | More flexible; can monitor output and react |

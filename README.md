@@ -6,7 +6,7 @@ structured PRD, planning, and automated execution.
 ## Pipeline Overview
 
 ```
-/pipeline → PRD → Interview → plan.md → implementation_plan.md → implementation_plan.json → ralph
+/armchair-architect → PRD → Interview → plan.md → implementation_plan.md → implementation_plan.json → ralph
 ```
 
 1. **Init** — describe your project, get a structured PRD
@@ -53,10 +53,10 @@ cd ~/.claude/plugins/doit-cc-plugin && git pull
 ## Usage
 
 ```bash
-/pipeline              # start or continue from current step
-/pipeline status       # show current state
-/pipeline reset        # clear state and start over
-/pipeline use execute ralphex   # switch executor
+/armchair-architect              # start or continue from current step
+/armchair-architect status       # show current state
+/armchair-architect reset        # clear state and start over
+/armchair-architect use execute ralphex   # switch executor
 ```
 
 ## Requirements

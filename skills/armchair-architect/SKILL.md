@@ -1,6 +1,6 @@
 ---
-name: pipeline
-description: Feature development pipeline. Guides a project from idea through PRD, planning, and automated execution. Usage: /pipeline [status|reset|use <component> <impl>]
+name: armchair-architect
+description: Feature development pipeline. Guides a project from idea through PRD, planning, and automated execution. Usage: /armchair-architect [status|reset|use <component> <impl>]
 ---
 
 Current pipeline state:

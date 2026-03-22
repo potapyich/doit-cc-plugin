@@ -17,18 +17,18 @@ No build step, no dependencies. Files are markdown prompt templates.
 ## Structure
 
 ```
-skills/pipeline/
-  SKILL.md               ← /pipeline entry point
+skills/armchair-architect/
+  SKILL.md               ← /armchair-architect entry point
   steps/                 ← WHAT to do at each phase (stable contract)
   impl/                  ← HOW to do it (swappable)
 ```
 
 ## Testing a Change
 
-1. Copy (or symlink) `skills/pipeline/` to `~/.claude/skills/pipeline/`
+1. Copy (or symlink) `skills/armchair-architect/` to `~/.claude/skills/armchair-architect/`
 2. Open any test project in Claude Code
-3. Run `/pipeline status` — should show state or "no state"
-4. Run `/pipeline` — should propose next step or init
+3. Run `/armchair-architect status` — should show state or "no state"
+4. Run `/armchair-architect` — should propose next step or init
 
 Or configure as plugin in `~/.claude/settings.json`:
 ```json
