@@ -2,14 +2,36 @@
 
 ## Goal
 
-Run the implementation plan using ralph (or the configured executor).
+Run the implementation plan using the configured executor.
 
 ## Instructions
 
-### 1. Check impl configuration
+### 1. Resolve executor
 
-Read `impl.execute` from state. Default: `ralph`.
-Load the corresponding impl file: `${CLAUDE_SKILL_DIR}/impl/execute/<impl>.md`
+If `impl.execute` in state is explicitly `"default"` — skip detection, use built-in executor.
+
+Otherwise, auto-detect ralph:
+
+```bash
+[ -f ~/.claude/skills/ralph-loop/SKILL.md ] || [ -f .claude/skills/ralph-loop/SKILL.md ] && echo "found" || echo "not found"
+```
+
+**If ralph found:** use `ralph` executor. Load `${CLAUDE_SKILL_DIR}/impl/execute/ralph.md`.
+
+**If ralph not found:** tell the user:
+
+> Ralph Loop is not installed. It runs tasks autonomously in separate sessions.
+>
+> Options:
+> **A)** Install ralph — add this to `~/.claude/settings.json`:
+> ```json
+> { "plugins": ["https://github.com/anthropics/claude-code-hooks-multi-agent-example"] }
+> ```
+> Then re-run `/armchair-architect` to use it.
+>
+> **B)** Run with built-in executor — I'll implement tasks here in this session (same logic, no install needed)
+
+Wait for choice. On **A**: stop, let user install. On **B**: use `default` executor, load `${CLAUDE_SKILL_DIR}/impl/execute/default.md`.
 
 ### 2. Pre-flight check
 
@@ -20,46 +42,40 @@ cat implementation_plan.json | jq 'length'
 ```
 
 If missing, tell the user:
-> `implementation_plan.json` not found. Run `/pipeline` from Step 06 to generate it first.
+> `implementation_plan.json` not found. Run `/armchair-architect` from Step 06 to generate it first.
 
-Show current task status (passed vs pending):
+Show current task status:
 ```bash
-cat implementation_plan.json | jq '[.[] | {id, passes}]'
+cat implementation_plan.json | jq '[.[] | {id, description: .description[:60], passes}]'
 ```
 
-### 3. Recommend supervised start
+Tell the user:
+> Found <N> tasks, <M> remaining (passes: false).
 
-> Before running the full plan, I recommend a supervised run of 3 tasks to verify
-> ralph picks tasks correctly and tests pass.
->
-> **Supervised run:**
-> ```bash
-> ralph 3
-> ```
->
-> **Full run:**
-> ```bash
-> ralph 10
-> ```
->
-> How many tasks should ralph run?
+### 3. Ask how to proceed
 
-Wait for user's choice, then follow the impl file instructions.
+> How would you like to run?
+>
+> **A)** Run 3 tasks — supervised start to verify things work *(recommended)*
+> **B)** Run all tasks — go to completion
+> **C)** Pick a number
+>
+> Reply A, B, C (+ number for C).
+
+Wait for user's reply, then follow the impl file instructions with the chosen task count.
 
 ### 4. Context handoff reminder
 
 If you notice you're approaching context limits (~40-50%), warn the user:
 
 > Approaching context limit. Before starting a new session:
-> 1. `progress.md` has the execution log
-> 2. `implementation_plan.json` has task status (`passes: true/false`)
-> 3. In the new session, run `/pipeline` — it will resume from `execute` step
->
-> ralph will continue from the first `passes: false` task.
+> 1. `implementation_plan.json` has task status (`passes: true/false`)
+> 2. In the new session, run `/armchair-architect` — it will resume from `execute` step
+> 3. Execution will continue from the first `passes: false` task.
 
 ### 5. On task failure or stuck task
 
-If ralph reports a task as stuck or failing after 2 attempts, propose a split:
+If a task fails after 2 fix attempts, propose a split:
 
 > Task `<id>` appears stuck. Suggested split:
 > - `<id>a`: <subtask description>

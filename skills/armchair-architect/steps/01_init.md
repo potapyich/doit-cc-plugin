@@ -6,6 +6,21 @@ Gather the user's project description and generate a structured PRD.
 
 ## Instructions
 
+### 0. Check for existing PRD
+
+Use the Bash tool to check if `prd.md` or `_prd_ru.md` exists in the current directory.
+
+If either file is found, show the user:
+
+> I found an existing PRD (`prd.md`). How would you like to proceed?
+>
+> **A)** Continue with the existing PRD — skip to next step
+> **B)** Start fresh — describe your project from scratch (existing PRD will be overwritten)
+
+Wait for the user's choice (A or B).
+- If **A**: read `prd.md`, confirm it's loaded, update state to `interview_setup`, and stop this step.
+- If **B**: proceed with the full init flow below.
+
 ### 1. Detect input language
 
 Check what language the user has been writing in this session.

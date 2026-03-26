@@ -68,4 +68,4 @@ Repeat until explicit approval.
 
 ### 7. Confirm
 
-> Implementation plan approved. Run `/pipeline` to generate execution tasks.
+> Implementation plan approved. Run `/armchair-architect` to generate execution tasks.

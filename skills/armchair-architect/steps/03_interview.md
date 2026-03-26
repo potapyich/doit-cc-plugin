@@ -84,4 +84,4 @@ When the interview is complete (user chose to finish or limit reached):
 ```
 
 5. Confirm:
-> Interview complete. PRD updated. Ready to generate the strategy plan — run `/pipeline` to continue.
+> Interview complete. PRD updated. Ready to generate the strategy plan — run `/armchair-architect` to continue.

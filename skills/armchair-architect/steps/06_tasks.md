@@ -55,7 +55,7 @@ Display:
 > - <category>: <count> tasks
 > ...
 >
-> Run `/pipeline` to start execution.
+> Run `/armchair-architect` to start execution.
 
 ### 5. Update state
 

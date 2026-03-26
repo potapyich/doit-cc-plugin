@@ -71,4 +71,4 @@ Repeat until the user explicitly approves.
 
 ### 7. Confirm
 
-> Plan approved. Run `/pipeline` to generate the detailed implementation plan.
+> Plan approved. Run `/armchair-architect` to generate the detailed implementation plan.

@@ -7,12 +7,12 @@ Use this if you have ralph installed and prefer it over the built-in executor.
 
 To switch to this executor:
 ```
-/pipeline use execute ralph
+/armchair-architect use execute ralph
 ```
 
 To switch back to the built-in executor:
 ```
-/pipeline use execute default
+/armchair-architect use execute default
 ```
 
 ---
@@ -21,7 +21,7 @@ To switch back to the built-in executor:
 
 ralph-loop plugin must be installed. If not installed, switch back to the default executor:
 ```
-/pipeline use execute default
+/armchair-architect use execute default
 ```
 
 ---
@@ -42,7 +42,7 @@ Then monitor ralph's output and report results back here when done.
 
 ## Resuming After Ralph
 
-When ralph completes its run, run `/pipeline` to sync state:
+When ralph completes its run, run `/armchair-architect` to sync state:
 - Pipeline will read `implementation_plan.json` and check for remaining `passes: false` tasks
 - If tasks remain, it will prompt you to continue
 - If all tasks pass, pipeline moves to completion

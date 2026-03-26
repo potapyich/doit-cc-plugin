@@ -90,7 +90,7 @@ Suggested split:
 Options:
 A) Approve split — I'll update implementation_plan.json and continue
 B) Skip this task — mark as known issue, continue with next
-C) Stop — investigate manually, then run /pipeline to resume
+C) Stop — investigate manually, then run /armchair-architect to resume
 ```
 
 2. Wait for user choice. Do NOT modify `implementation_plan.json` until approved.
@@ -111,7 +111,7 @@ At ~40-50% estimated usage, warn the user:
 > Completed so far: <N> tasks. Remaining: <M> tasks.
 >
 > Recommended: start a new Claude Code session.
-> State is saved — run `/pipeline` to resume from the execute step.
+> State is saved — run `/armchair-architect` to resume from the execute step.
 > ralph will continue from the first `passes: false` task.
 
 ---
@@ -138,7 +138,7 @@ Update pipeline state — set `step` to `"done"`.
 If you prefer to use the ralph-loop plugin instead of this executor:
 
 ```
-/pipeline use execute ralph
+/armchair-architect use execute ralph
 ```
 
 Then see `impl/execute/ralph.md` for how to invoke it.
