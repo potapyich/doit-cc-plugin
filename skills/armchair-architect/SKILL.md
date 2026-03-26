@@ -5,8 +5,10 @@ description: Feature development pipeline. Guides a project from idea through PR
 
 Current pipeline state:
 ```json
-!`cat .pipeline/state.json 2>/dev/null || echo '{"step":"init","completed":[],"pending":["init","interview_setup","interview","plan","impl_plan","tasks","execute"],"impl":{"interview":"ask_user_question","execute":"ralph"}}'`
+!`cat .pipeline/state.json 2>/dev/null || echo '{"step":"init","completed":[],"pending":["init","interview_setup","interview","plan","impl_plan","tasks","execute"],"impl":{"interview":"ask_user_question","execute":"default"}}'`
 ```
+
+Skill directory: ${CLAUDE_SKILL_DIR}
 
 Arguments: "$ARGUMENTS"
 

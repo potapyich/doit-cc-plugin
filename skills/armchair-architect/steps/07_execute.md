@@ -8,30 +8,12 @@ Run the implementation plan using the configured executor.
 
 ### 1. Resolve executor
 
-If `impl.execute` in state is explicitly `"default"` — skip detection, use built-in executor.
+Read `impl.execute` from state. Default: `default`.
 
-Otherwise, auto-detect ralph:
+- `default` — built-in executor: I implement tasks here in this session
+- `ralph` — delegates to ralph-loop plugin running in a separate session
 
-```bash
-[ -f ~/.claude/skills/ralph-loop/SKILL.md ] || [ -f .claude/skills/ralph-loop/SKILL.md ] && echo "found" || echo "not found"
-```
-
-**If ralph found:** use `ralph` executor. Load `${CLAUDE_SKILL_DIR}/impl/execute/ralph.md`.
-
-**If ralph not found:** tell the user:
-
-> Ralph Loop is not installed. It runs tasks autonomously in separate sessions.
->
-> Options:
-> **A)** Install ralph — add this to `~/.claude/settings.json`:
-> ```json
-> { "plugins": ["https://github.com/anthropics/claude-code-hooks-multi-agent-example"] }
-> ```
-> Then re-run `/armchair-architect` to use it.
->
-> **B)** Run with built-in executor — I'll implement tasks here in this session (same logic, no install needed)
-
-Wait for choice. On **A**: stop, let user install. On **B**: use `default` executor, load `${CLAUDE_SKILL_DIR}/impl/execute/default.md`.
+Load the corresponding impl file: `${CLAUDE_SKILL_DIR}/impl/execute/<impl>.md`
 
 ### 2. Pre-flight check
 

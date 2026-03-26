@@ -7,7 +7,20 @@ Reads `implementation_plan.json`, implements tasks one by one, verifies each, ma
 
 ---
 
+## Response discipline
+
+Keep output short during execution — long responses get cut off mid-task:
+- Announce task in one line, then act immediately
+- Do not explain what you are about to do — just do it
+- Do not narrate file reads or edits — make the change, move on
+- After verification passes: one line confirmation, next task
+
+---
+
 ## Execution Loop
+
+Before starting: note the task count N chosen by the user in step 07 (e.g. 3, 10, or "all").
+Track how many tasks you complete in this run. Stop after N tasks even if more remain.
 
 ### 1. Load the task list
 
@@ -63,7 +76,23 @@ Announce:
 
 ### 6. Loop
 
-Go back to step 1 — pick the next `passes: false` task.
+Increment completed task count. If count >= N (the user's chosen limit): go to Mid-run Stop.
+Otherwise go back to step 1 — pick the next `passes: false` task.
+
+---
+
+## Mid-run Stop
+
+When the task limit is reached (but tasks remain):
+
+```bash
+cat implementation_plan.json | jq '[.[] | select(.passes == false)] | length'
+```
+
+Tell the user:
+> Completed <N> tasks this run. <M> tasks remaining.
+>
+> State is saved. Run `/armchair-architect` to continue from where we stopped.
 
 ---
 
@@ -110,9 +139,7 @@ At ~40-50% estimated usage, warn the user:
 > Approaching context limit after task <id>.
 > Completed so far: <N> tasks. Remaining: <M> tasks.
 >
-> Recommended: start a new Claude Code session.
-> State is saved — run `/armchair-architect` to resume from the execute step.
-> ralph will continue from the first `passes: false` task.
+> Start a new session and run `/armchair-architect` — it will resume from the first `passes: false` task.
 
 ---
 
